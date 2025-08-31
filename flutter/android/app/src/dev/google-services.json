@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "825005524495",
+    "firebase_url": "https://saemtalktalk-dev-1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "saemtalktalk-dev-1",
+    "storage_bucket": "saemtalktalk-dev-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825005524495:android:64ce5d37bd08bce315857a",
+        "android_client_info": {
+          "package_name": "com.example.saem_talk_talk.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825005524495-ouvalqso5oucr7fa8ngh6sda6g9oho8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDFQmJAv8N73vQqmc6lI4RZ3p6WyOy2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825005524495-ouvalqso5oucr7fa8ngh6sda6g9oho8v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "825005524495-vta5kvnm3jd49a7641691658ntgmr3qr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.saemTalkTalk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

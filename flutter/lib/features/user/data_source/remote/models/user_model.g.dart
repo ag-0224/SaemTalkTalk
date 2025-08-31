@@ -1,0 +1,42 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'user_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+      uid: json['uid'] as String,
+      signUpDate: const TimeStampConverter()
+          .fromJson(json['sign_up_date'] as Timestamp),
+      lastLoginDate: const TimeStampConverter()
+          .fromJson(json['last_login_date'] as Timestamp),
+      loginCount: (json['login_count'] as num?)?.toInt(),
+      locale: json['locale'] as String?,
+      email: json['email'] as String,
+      profileImgUrl: json['profile_img_url'] as String?,
+      name: json['name'] as String,
+      status: json['status'] as String,
+      company: json['company'] as String,
+      role: json['role'] as String,
+      position: json['position'] as String?,
+      department: json['department'] as String?,
+    );
+
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      'uid': instance.uid,
+      'locale': instance.locale,
+      'email': instance.email,
+      'profile_img_url': instance.profileImgUrl,
+      'name': instance.name,
+      'status': instance.status,
+      'company': instance.company,
+      'role': instance.role,
+      'position': instance.position,
+      'department': instance.department,
+      'login_count': instance.loginCount,
+      'sign_up_date': const TimeStampConverter().toJson(instance.signUpDate),
+      'last_login_date':
+          const TimeStampConverter().toJson(instance.lastLoginDate),
+    };
