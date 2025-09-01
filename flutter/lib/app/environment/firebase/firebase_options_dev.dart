@@ -53,11 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAXDFQmJAv8N73vQqmc6lI4RZ3p6WyOy2s',
-    appId: '1:825005524495:android:64ce5d37bd08bce315857a',
-    messagingSenderId: '825005524495',
-    projectId: 'saemtalktalk-dev-1',
-    databaseURL: 'https://saemtalktalk-dev-1-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'saemtalktalk-dev-1.firebasestorage.app',
+    apiKey: 'AIzaSyDus1tz6zoTOJMhrTsZi_0i9MKtI_V5Rbk',
+    appId: '1:146055579929:android:708de8333d799aa3c35d88',
+    messagingSenderId: '146055579929',
+    projectId: 'saemtalktalk-dev-2',
+    storageBucket: 'saemtalktalk-dev-2.firebasestorage.app',
   );
 }
