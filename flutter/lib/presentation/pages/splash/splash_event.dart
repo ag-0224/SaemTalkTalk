@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/router/router.dart';
+import 'package:saem_talk_talk/app/util/timer_notifier_provider.dart';
 import 'package:saem_talk_talk/core/services/snack_bar_service.dart';
 import 'package:saem_talk_talk/features/auth/auth.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_page.dart';
@@ -15,21 +16,6 @@ mixin class SplashEvent {
   ///
   /// 초기화를 한번만 실행하기 위해 사용
   static bool isInitializing = false;
-
-  ///
-  /// 이메일 인증을 전송한다
-  ///
-  Future<void> _sendEmailVerification() async {
-    final result = await sendEmailVerificationUseCase();
-    result.fold(
-      onSuccess: (value) {
-        SnackBarService.showSnackBar('이메일이 전송되었습니다.');
-      },
-      onFailure: (e) {
-        SnackBarService.showSnackBar('오류가 발생하였습니다. 재전송을 시도해주세요.');
-      },
-    );
-  }
 
   ///
   /// 유저 인증정보와 유저 정보를 토대로 라우팅을 분기한다.
@@ -55,7 +41,6 @@ mixin class SplashEvent {
         if (userData == null) {
 
           if (!auth.emailVerified) {
-            _sendEmailVerification();
             const UserVerificationRoute().go(ref.context);
           } else {
             const UserTypeSelectRoute().go(ref.context);
