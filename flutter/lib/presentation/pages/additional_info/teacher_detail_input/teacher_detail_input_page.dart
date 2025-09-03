@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/teacher_detail_input_route_arg_provider.dart';
+import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/teacher_name_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/teacher_detail_input_event.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/teacher_detail_input_state.dart';
 import 'package:saem_talk_talk/presentation/widgets/base/base_page.dart';

@@ -13,6 +13,11 @@ mixin class TeacherDetailInputState {
       ref.watch(teacherNameInputProvider) != null;
 
   ///
+  /// 선생님 이름
+  ///
+  String? teacherName(WidgetRef ref) => ref.watch(teacherNameInputProvider);
+
+  ///
   /// 선생님 부서
   ///
   String? teacherDepartment(WidgetRef ref) =>
