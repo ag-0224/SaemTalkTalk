@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'company_department_provider.dart';
+part of 'company_position_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$companyDepartmentHash() => r'25c182d16b2f852b82196cff8713f1c00b3898ca';
+String _$companyPositionHash() => r'1d6c8ca54a0a99a2c570f0f5445eb46c357f6681';
 
-/// See also [CompanyDepartment].
-@ProviderFor(CompanyDepartment)
-final companyDepartmentProvider =
-    AutoDisposeAsyncNotifierProvider<CompanyDepartment, List<String>>.internal(
-  CompanyDepartment.new,
-  name: r'companyDepartmentProvider',
+/// See also [CompanyPosition].
+@ProviderFor(CompanyPosition)
+final companyPositionProvider =
+    AutoDisposeAsyncNotifierProvider<CompanyPosition, List<String>>.internal(
+  CompanyPosition.new,
+  name: r'companyPositionProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$companyDepartmentHash,
+      : _$companyPositionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CompanyDepartment = AutoDisposeAsyncNotifier<List<String>>;
+typedef _$CompanyPosition = AutoDisposeAsyncNotifier<List<String>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
