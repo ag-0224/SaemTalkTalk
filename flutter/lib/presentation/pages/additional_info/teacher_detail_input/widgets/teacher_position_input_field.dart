@@ -6,13 +6,19 @@ class _TeacherPositionInputField extends ConsumerWidget
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CustomDropdownButtonField(
-      hint: '직급',
-      value: teacherPosition(ref),
-      dropdownItems: [],
-      onChanged: (input) {
-        onTeacherPositionInputChanged(ref, input: input);
+    return positionList(ref).when(
+      data: (positions) {
+        return CustomDropdownButtonField(
+          hint: '직급',
+          value: teacherPosition(ref),
+          dropdownItems: positions,
+          onChanged: (input) {
+            onTeacherPositionInputChanged(ref, input: input);
+          },
+        );
       },
+      error: (_, __) => const EmptyBox(),
+      loading: () => const EmptyBox(),
     );
   }
 }

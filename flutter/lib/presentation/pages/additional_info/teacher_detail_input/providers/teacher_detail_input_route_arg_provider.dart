@@ -1,11 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:saem_talk_talk/app/router/router.dart';
 
 part 'teacher_detail_input_route_arg_provider.g.dart';
 
 @riverpod
 TeacherDetailInputRouteArg teacherDetailInputRouteArg(
     TeacherDetailInputRouteArgRef ref) {
-  throw Exception('teacherDetailRouteArg > argument를 초기화 해주어야 합니다.');
+  return TeacherDetailInputRoute.arg;
 }
 
 final class TeacherDetailInputRouteArg {

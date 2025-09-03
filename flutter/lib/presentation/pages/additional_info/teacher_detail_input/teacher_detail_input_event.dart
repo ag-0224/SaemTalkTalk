@@ -8,7 +8,9 @@ mixin class TeacherDetailInputEvent {
   /// 교사 이름 유효성 검사
   ///
   String? teacherNameValidation(WidgetRef ref, {required String? input}) {
-    return ref.read(teacherNameInputProvider.notifier).teacherNameValidation(input);
+    return ref
+        .read(teacherNameInputProvider.notifier)
+        .teacherNameValidation(input);
   }
 
   ///
@@ -28,7 +30,8 @@ mixin class TeacherDetailInputEvent {
   ///
   /// 부서가 입력되었을 때
   ///
-  void onTeacherDepartmentInputChanged(WidgetRef ref, {required String? input}) {
+  void onTeacherDepartmentInputChanged(WidgetRef ref,
+      {required String? input}) {
     return ref.read(departmentInputProvider.notifier).onChanged(input);
   }
 

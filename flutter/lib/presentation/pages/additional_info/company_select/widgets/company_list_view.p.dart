@@ -26,7 +26,8 @@ class _CompanyListView extends HookConsumerWidget
                         children: [
                           InkWell(
                             onTap: () {
-                              onCompanyContentTapped(context, item.id, item.companyName);
+                              onCompanyContentTapped(
+                                  context, item.id, item.companyName);
                             },
                             child: CompanyContentItemView(
                               companyName: item.companyName,
@@ -46,7 +47,8 @@ class _CompanyListView extends HookConsumerWidget
                       _buildErrorOccuredView(targetController),
                   newPageErrorIndicatorBuilder: (_) =>
                       _buildErrorOccuredView(targetController),
-                  noItemsFoundIndicatorBuilder: _buildNoItemFoundView,
+                  noItemsFoundIndicatorBuilder: (_) =>
+                      _buildNoItemFoundView(targetController),
                 ),
               ),
             );
@@ -73,13 +75,15 @@ class _CompanyListView extends HookConsumerWidget
   ///
   /// 검색된 항목 없음
   ///
-  Widget _buildNoItemFoundView(BuildContext context) {
+  Widget _buildNoItemFoundView(
+      PagingController<DocumentSnapshot<CompanyModel>?, CompanyEntity>
+          controller) {
     return CompanyPaginationIndicatorView(
       title: '검색 항목 없음',
       description: '검색된 항목이 없습니다.',
       btnText: '재시도',
       onBtnTapped: () {
-
+        controller.refresh();
       },
     );
   }

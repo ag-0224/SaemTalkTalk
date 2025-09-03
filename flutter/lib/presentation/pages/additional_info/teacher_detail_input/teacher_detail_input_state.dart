@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/company_department_provider.dart';
+import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/company_position_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/department_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/position_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/teacher_name_input_provider.dart';
@@ -27,4 +28,10 @@ mixin class TeacherDetailInputState {
   ///
   AsyncValue<List<String>> departmentList(WidgetRef ref) =>
       ref.watch(companyDepartmentProvider);
+
+  ///
+  /// 직급 리스트
+  ///
+  AsyncValue<List<String>> positionList(WidgetRef ref) =>
+      ref.watch(companyPositionProvider);
 }

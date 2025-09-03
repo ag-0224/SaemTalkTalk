@@ -229,6 +229,7 @@ class TeacherDetailInputRoute extends GoRouteData {
 
   static const String path = 'teacher-detail-input/:companyId';
   static const String name = 'teacher detail input';
+  static late TeacherDetailInputRouteArg arg;
 
   final TeacherDetailInputRouteArg $extra;
 
@@ -236,9 +237,8 @@ class TeacherDetailInputRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return TeacherDetailInputPage(
-      arg: $extra,
-    );
+    arg = $extra;
+    return TeacherDetailInputPage();
   }
 }
 
