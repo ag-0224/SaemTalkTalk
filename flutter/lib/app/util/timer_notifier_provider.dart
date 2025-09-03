@@ -9,7 +9,7 @@
   class TimerNotifier extends StateNotifier<TimerModel> {
     TimerNotifier() : super(_initialState);
 
-    static const int _initialDurationInSeconds = 30;
+    static const int _initialDurationInSeconds = 60;
     static const Duration _initialDuration =
     Duration(seconds: _initialDurationInSeconds);
     static final _initialState = TimerModel(

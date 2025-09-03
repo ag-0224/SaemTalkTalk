@@ -28,30 +28,14 @@ mixin class SignInEvent {
         if (userData == null) {
 
           if (!auth.emailVerified) {
-            _sendEmailVerification();
             const UserVerificationRoute().go(ref.context);
           } else {
             const UserTypeSelectRoute().go(ref.context);
           }
 
         } else {
-          // const MainRoute().go(ref.context);
+          const MainRoute().go(ref.context);
         }
-      },
-    );
-  }
-
-  ///
-  /// 이메일 인증을 전송한다
-  ///
-  Future<void> _sendEmailVerification() async {
-    final result = await sendEmailVerificationUseCase();
-    result.fold(
-      onSuccess: (value) {
-        SnackBarService.showSnackBar('이메일이 전송되었습니다.');
-      },
-      onFailure: (e) {
-        SnackBarService.showSnackBar('오류가 발생하였습니다. 재전송을 시도해주세요.');
       },
     );
   }
