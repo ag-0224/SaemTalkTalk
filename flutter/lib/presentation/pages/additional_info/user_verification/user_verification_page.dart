@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/style/app_color.dart';
 import 'package:saem_talk_talk/app/style/app_text_style.dart';
+import 'package:saem_talk_talk/app/util/timer_notifier_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_event.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_state.dart';
 import 'package:saem_talk_talk/presentation/widgets/base/base_page.dart';
@@ -18,8 +20,18 @@ part 'widgets/user_verification_email_resend_button.dart';
 
 part 'widgets/user_verification_button.dart';
 
-class UserVerificationPage extends BasePage with UserVerificationState, UserVerificationEvent {
+class UserVerificationPage extends BasePage
+    with UserVerificationState, UserVerificationEvent {
   const UserVerificationPage({super.key});
+
+  @override
+  void onInit(WidgetRef ref) {
+    Future.delayed(Duration(seconds: 1)).then(
+          (_) async {
+        await sendEmailVerification(ref);
+      },
+    );
+  }
 
   @override
   Widget buildPage(BuildContext context, WidgetRef ref) {
@@ -46,7 +58,7 @@ class UserVerificationPage extends BasePage with UserVerificationState, UserVeri
                 content: '해당 이메일 계정 내의 인증 링크를 클릭하면\n인증이 완료됩니다',
               ),
               Spacer(),
-              _UserVerificationEmailResendButton(onTap: (){}, isActive: true, secondLeft: 30),
+              _UserVerificationEmailResendButton(),
               _UserVerificationButton(),
             ],
           ),
