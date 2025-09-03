@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/style/app_color.dart';
 import 'package:saem_talk_talk/app/style/app_text_style.dart';
-import 'package:saem_talk_talk/app/util/timer_notifier_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_event.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_state.dart';
 import 'package:saem_talk_talk/presentation/widgets/base/base_page.dart';
