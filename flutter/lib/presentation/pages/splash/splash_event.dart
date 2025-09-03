@@ -47,7 +47,7 @@ mixin class SplashEvent {
           }
 
         } else {
-          // const MainRoute().go(ref.context);
+          const MainRoute().go(ref.context);
         }
       },
     );

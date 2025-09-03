@@ -7,6 +7,7 @@ import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/teacher_detail_input_page.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_type_select/user_type_select_page.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_page.dart';
+import 'package:saem_talk_talk/presentation/pages/main/main_page.dart';
 import 'package:saem_talk_talk/presentation/pages/permission/permission_page.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_up/sign_up_page.dart';
@@ -242,31 +243,31 @@ class TeacherDetailInputRoute extends GoRouteData {
   }
 }
 
-//
-// ///
-// /// Main Route
-// ///
-// @TypedGoRoute<MainRoute>(
-//   path: MainRoute.path,
-//   name: MainRoute.name,
-// )
-// class MainRoute extends GoRouteData {
-//   const MainRoute();
-//
-//   static const String path = '/main';
-//   static const String name = 'main';
-//
-//   @override
-//   Page<Function> buildPage(BuildContext context, GoRouterState state) {
-//     return CustomTransitionPage(
-//       key: state.pageKey,
-//       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//         return FadeTransition(
-//           opacity: Tween(begin: 0.0, end: 1.0).animate(animation),
-//           child: child,
-//         );
-//       },
-//       child: const MainPage(),
-//     );
-//   }
-//}
+
+///
+/// Main Route
+///
+@TypedGoRoute<MainRoute>(
+  path: MainRoute.path,
+  name: MainRoute.name,
+)
+class MainRoute extends GoRouteData {
+  const MainRoute();
+
+  static const String path = '/main';
+  static const String name = 'main';
+
+  @override
+  Page<Function> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: Tween(begin: 0.0, end: 1.0).animate(animation),
+          child: child,
+        );
+      },
+      child: const MainPage(),
+    );
+  }
+}
