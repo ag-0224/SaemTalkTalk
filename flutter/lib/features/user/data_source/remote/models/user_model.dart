@@ -16,11 +16,7 @@ class UserModel {
     required this.email,
     this.profileImgUrl,
     required this.name,
-    required this.status,
-    required this.company,
-    required this.role,
-    this.position,
-    this.department,
+    required this.companyId,
   });
 
   /// 유저 UID
@@ -30,7 +26,7 @@ class UserModel {
   final String? locale;
 
   /// 유저 이메일
-  final String email;
+  final String? email;
 
   /// 유저 이미지 경로
   final String? profileImgUrl;
@@ -38,20 +34,8 @@ class UserModel {
   /// 유저 이름
   final String name;
 
-  /// 유저 활성화 상태
-  final String status;
-
-  /// 유저 회사
-  final String company;
-
-  /// 유저 role
-  final String role;
-
-  /// 유저 직급
-  final String? position;
-
-  /// 유저 부서
-  final String? department;
+  /// 유저 회사 id
+  final String companyId;
 
   /// 접속 횟수
   final int? loginCount;
@@ -71,9 +55,8 @@ class UserModel {
         lastLoginDate: entity.lastLoginDate,
         email: entity.email,
         name: entity.name,
-        status: entity.status,
-        company: entity.company,
-        role: entity.role);
+        companyId: entity.companyId,
+    );
   }
 
   factory UserModel.fromFirestore(
@@ -91,7 +74,5 @@ class UserModel {
         'profile_img_url': profileImgUrl,
         'name': name,
         'locale_code': locale,
-        'position': position,
-        'department': department,
       };
 }

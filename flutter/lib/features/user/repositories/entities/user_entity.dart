@@ -9,7 +9,7 @@ class UserEntity {
   final String? locale;
 
   /// 유저 이메일
-  final String email;
+  final String? email;
 
   /// 유저 이미지 경로
   final String? profileImgUrl;
@@ -17,20 +17,8 @@ class UserEntity {
   /// 유저 이름
   final String name;
 
-  /// 유저 활성화 상태
-  final String status;
-
-  /// 유저 회사
-  final String company;
-
-  /// 유저 role
-  final String role;
-
-  /// 유저 직급
-  final String? position;
-
-  /// 유저 부서
-  final String? department;
+  /// 유저 회사 id
+  final String companyId;
 
   /// 접속 횟수
   final int? loginCount;
@@ -44,14 +32,10 @@ class UserEntity {
   const UserEntity({
     required this.uid,
     this.locale,
-    required this.email,
+    this.email,
     this.profileImgUrl,
     required this.name,
-    required this.status,
-    required this.company,
-    required this.role,
-    this.position,
-    this.department,
+    required this.companyId,
     this.loginCount,
     required this.signUpDate,
     required this.lastLoginDate,
@@ -64,11 +48,7 @@ class UserEntity {
       email: model.email,
       profileImgUrl: model.profileImgUrl,
       name: model.name,
-      status: model.status,
-      company: model.company,
-      role: model.role,
-      position: model.position,
-      department: model.department,
+      companyId: model.companyId,
       loginCount: model.loginCount ?? 0,
       signUpDate: model.signUpDate,
       lastLoginDate: model.lastLoginDate,
@@ -96,11 +76,7 @@ class UserEntity {
       email: email ?? this.email,
       profileImgUrl: profileImgUrl ?? this.profileImgUrl,
       name: name ?? this.name,
-      status: status ?? this.status,
-      company: company ?? this.company,
-      role: role ?? this.role,
-      position: position ?? this.position,
-      department: department ?? this.department,
+      companyId: company ?? this.companyId,
       loginCount: loginCount ?? this.loginCount,
       signUpDate: signUpDate ?? this.signUpDate,
       lastLoginDate: lastLoginDate ?? this.lastLoginDate,

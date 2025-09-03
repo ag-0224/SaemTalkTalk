@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saem_talk_talk/features/user/data_source/remote/models/user_model.dart';
 
 abstract class FirestoreUsersRef {
-  static const String name = 'Users';
+  static const String name = 'user';
   static const String lastLoginDateField = 'last_login_date';
   static const String loginCountField = 'login_count';
 
