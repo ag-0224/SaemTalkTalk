@@ -26,8 +26,8 @@ class SplashPage extends BasePage with SplashEvent {
         children: [
           SvgPicture.asset(
             Assets.logo,
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           ),
         ],
       ),

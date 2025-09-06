@@ -38,10 +38,21 @@ class SignInPage extends BasePage with SignInState {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              SvgPicture.asset(
-                Assets.logo_with_text,
-                width: 120,
-                height: 45,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    Assets.logo,
+                    width: 40,
+                    height: 40,
+                  ),
+                  Gap(12),
+                  SvgPicture.asset(
+                    Assets.text_logo,
+                    width: 75,
+                    height: 45,
+                  ),
+                ],
               ),
               Gap(32),
               _SignInEmailInputField(emailFormKey),
