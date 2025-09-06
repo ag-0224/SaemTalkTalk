@@ -6,6 +6,7 @@ import 'package:saem_talk_talk/features/company/data_source/remote/models/compan
 import 'package:saem_talk_talk/features/company/data_source/remote/models/department_model.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/company_entity.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/department_entity.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/position_entity.dart';
 
 abstract interface class CompanyRepository {
@@ -27,4 +28,8 @@ abstract interface class CompanyRepository {
   Future<Result<List<DepartmentEntity>>> getDepartments(String companyId);
 
   Future<Result<List<PositionEntity>>> getPositions(String companyId);
+
+  Future<Result<void>> createCompany(CompanyEntity data);
+
+  Future<Result<void>> createMember(MemberEntity data, String companyId);
 }

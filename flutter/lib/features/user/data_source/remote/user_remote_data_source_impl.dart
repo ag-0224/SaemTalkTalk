@@ -48,6 +48,12 @@ final class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
+  Future<void> deleteUser(UserModel user) async {
+
+    await FirestoreUsersRef.doc().delete();
+  }
+
+  @override
   Future<void> updateLastLoginDate() async {
     if (!await FirestoreUsersRef.isExist()) {
       throw const NoUserDataException();

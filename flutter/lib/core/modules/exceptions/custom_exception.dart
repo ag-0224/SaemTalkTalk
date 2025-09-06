@@ -20,6 +20,14 @@ class NoUserDataException extends CustomException {
   const NoUserDataException() : super('100002', '유저 데이터가 존재하지않습니다.');
 }
 
+class NoCompanyDataException extends CustomException {
+  const NoCompanyDataException() : super('500002', '회사 데이터가 존재하지않습니다.');
+}
+
+class AlreadyExistCompanyDataException extends CustomException {
+  const AlreadyExistCompanyDataException() : super('500001', '이미 회사 데이터가 존재합니다.');
+}
+
 class FetchCompanyListOverviewException extends CustomException {
   const FetchCompanyListOverviewException()
       : super('500009', '회사 목록 리스트를 불러오는 데 실패하였습니다.');
