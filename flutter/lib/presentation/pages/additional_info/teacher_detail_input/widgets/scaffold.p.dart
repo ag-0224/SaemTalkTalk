@@ -26,12 +26,12 @@ class _Scaffold extends StatelessWidget {
         const Gap(4),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: positionDropdownButtonFormField,
+          child: departmentDropdownButtonFormField,
         ),
         const Gap(4),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: departmentDropdownButtonFormField,
+          child: positionDropdownButtonFormField,
         ),
         const Spacer(),
         Container(

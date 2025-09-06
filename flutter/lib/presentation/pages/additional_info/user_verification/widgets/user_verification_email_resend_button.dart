@@ -1,33 +1,32 @@
 part of '../user_verification_page.dart';
 
-class _UserVerificationEmailResendButton extends StatelessWidget {
+class _UserVerificationEmailResendButton extends ConsumerWidget
+    with UserVerificationState, UserVerificationEvent {
   const _UserVerificationEmailResendButton({
-    required this.isActive,
-    required this.secondLeft,
     this.secondaryType = true,
-    this.onTap,
     super.key,
   });
 
-  final bool isActive;
-  final int secondLeft;
   final bool secondaryType;
-  final void Function()? onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final backgroundColor =
-    secondaryType ? AppColor.of.brand2 : AppColor.of.brand1;
+        secondaryType ? AppColor.of.brand2 : AppColor.of.brand1;
 
     final foregroundColor =
-    secondaryType ? AppColor.of.brand1 : AppColor.of.white;
+        secondaryType ? AppColor.of.brand1 : AppColor.of.white;
+
+    final timerState = resendCooldown(ref).timeLeft.inSeconds;
+
+    final isActive = !resendCooldown(ref).isTimerTicking;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: isActive ? onTap : null,
+        onPressed: () => isActive ? onResendEmailVerificationBtnTapped(ref) : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
@@ -41,23 +40,23 @@ class _UserVerificationEmailResendButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (secondLeft > 0)
+            if (timerState > 0)
               SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
-                  value: (30 - secondLeft) / 30.0,
+                  value: (30 - timerState) / 30.0,
                   strokeCap: StrokeCap.round,
                   color: AppColor.of.brand1,
                   backgroundColor: AppColor.of.white,
                   strokeWidth: 2,
                 ),
               ),
-            if (secondLeft > 0) const Gap(8),
+            if (timerState > 0) const Gap(8),
             SizedBox(
               width: 42,
               child: Text(
-                secondLeft > 0 ? '$secondLeft' : '재전송',
+                timerState > 0 ? '$timerState' : '재전송',
                 style: AppTextStyle.body1.copyWith(color: foregroundColor),
               ),
             ),

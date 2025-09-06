@@ -4,6 +4,8 @@ import 'package:saem_talk_talk/core/firebase_query_constraints.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/company_model.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/department_model.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/position_model.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/company_entity.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
 
 abstract class CompanyRemoteDataSource {
   ///
@@ -27,4 +29,14 @@ abstract class CompanyRemoteDataSource {
   /// 회사 position 리스트 호출
   ///
   Future<List<PositionModel>> getPositions(String companyId);
+
+  ///
+  /// company 생성
+  ///
+  Future<void> createCompany(CompanyEntity company);
+
+  ///
+  /// member 생성
+  ///
+  Future<void> createMember(MemberEntity data, String companyId);
 }

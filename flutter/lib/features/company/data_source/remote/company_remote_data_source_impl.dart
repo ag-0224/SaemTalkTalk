@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:saem_talk_talk/core/firebase_pagination_result.dart';
 import 'package:saem_talk_talk/core/firebase_query_constraints.dart';
+import 'package:saem_talk_talk/core/modules/exceptions/custom_exception.dart';
 import 'package:saem_talk_talk/core/query_constraints_applier.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/companies_ref.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/company_remote_data_source.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/company_model.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/department_model.dart';
+import 'package:saem_talk_talk/features/company/data_source/remote/models/member_model.dart';
 import 'package:saem_talk_talk/features/company/data_source/remote/models/position_model.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/company_entity.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
 
 class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
   final QueryConstraintApplier _constraintApplier;
@@ -79,7 +83,8 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
 
   @override
   Future<List<DepartmentModel>> getDepartments(String companyId) async {
-    final departmentModels = await FirestoreDepartmentsRef.collection(companyId).get();
+    final departmentModels =
+        await FirestoreDepartmentsRef.collection(companyId).get();
 
     return [
       ...departmentModels.docs.map((e) => e.data()),
@@ -88,10 +93,39 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
 
   @override
   Future<List<PositionModel>> getPositions(String companyId) async {
-    final positionModels = await FirestorePositionsRef.collection(companyId).get();
+    final positionModels =
+        await FirestorePositionsRef.collection(companyId).get();
 
     return [
       ...positionModels.docs.map((e) => e.data()),
     ];
+  }
+
+  @override
+  Future<void> createCompany(CompanyEntity data) async {
+    final companyId = data.id;
+
+    if (await FirestoreCompaniesRef.isExist(companyId)) {
+      throw const AlreadyExistCompanyDataException();
+    }
+
+    final companyData = FirestoreCompaniesRef.doc(companyId);
+    final company = CompanyModel.fromEntity(data);
+
+    await companyData.set(company);
+  }
+
+  @override
+  Future<void> createMember(MemberEntity data, String companyId) async {
+    final userId = data.uid;
+
+    if (await FirestoreMembersRef.isExist(companyId, userId)) {
+      throw const AlreadyExistUserDataException();
+    }
+
+    final memberData = FirestoreMembersRef.doc(companyId, userId);
+    final member = MemberModel.fromEntity(data);
+
+    await memberData.set(member);
   }
 }

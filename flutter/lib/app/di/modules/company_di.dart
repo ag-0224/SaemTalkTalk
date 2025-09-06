@@ -4,8 +4,11 @@ import 'package:saem_talk_talk/core/query_constraints_applier.dart';
 import 'package:saem_talk_talk/features/company/company.dart';
 import 'package:saem_talk_talk/features/company/repository/company_repository.dart';
 import 'package:saem_talk_talk/features/company/repository/company_repositoy_impl.dart';
+import 'package:saem_talk_talk/features/company/use_case/create_company_use_case.dart';
+import 'package:saem_talk_talk/features/company/use_case/create_member_use_case.dart';
 import 'package:saem_talk_talk/features/company/use_case/get_company_list_use_case.dart';
 import 'package:saem_talk_talk/features/company/use_case/get_department_list_use_case.dart';
+import 'package:saem_talk_talk/features/company/use_case/get_position_list_use_case.dart';
 
 final class CompanyDependencyInjection extends FeatureDependencyInjection {
   @override
@@ -34,6 +37,21 @@ final class CompanyDependencyInjection extends FeatureDependencyInjection {
         () => GetDepartmentListUseCase(
           companyRepositoy,
         ),
-      );
+      )
+      ..registerFactory(
+        () => GetPositionListUseCase(
+          companyRepositoy,
+        ),
+      )
+      ..registerFactory(
+        () => CreateCompanyUseCase(
+          companyRepositoy,
+        ),
+      )
+    ..registerFactory(
+        () => CreateMemberUseCase(
+          companyRepositoy,
+        ),
+    );
   }
 }

@@ -1,15 +1,28 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:saem_talk_talk/app/router/router.dart';
+import 'package:saem_talk_talk/core/constants/user_status_enum.dart';
+import 'package:saem_talk_talk/core/helper/string_generator.dart';
+import 'package:saem_talk_talk/features/company/company.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/company_entity.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
+import 'package:saem_talk_talk/features/company/use_case/create_company_use_case.dart';
+import 'package:saem_talk_talk/features/user/repositories/entities/user_entity.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/manager_detail_input/providers/company_email_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/manager_detail_input/providers/company_name_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/manager_detail_input/providers/company_phone_number_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/manager_detail_input/providers/manager_name_input_provider.dart';
+import 'package:saem_talk_talk/presentation/providers/user/user_auth_provider.dart';
+import 'package:saem_talk_talk/presentation/providers/user/user_info_provider.dart';
 
 mixin class ManagerDetailInputEvent {
   ///
   /// 회사 이름 유효성 검사
   ///
   String? companyNameValidation(WidgetRef ref, {required String? input}) {
-    return ref.read(companyNameInputProvider.notifier).companyNameValidation(input);
+    return ref
+        .read(companyNameInputProvider.notifier)
+        .companyNameValidation(input);
   }
 
   ///
@@ -30,7 +43,9 @@ mixin class ManagerDetailInputEvent {
   /// 대표 이름 유효성 검사
   ///
   String? managerNameValidation(WidgetRef ref, {required String? input}) {
-    return ref.read(managerNameInputProvider.notifier).managerNameValidation(input);
+    return ref
+        .read(managerNameInputProvider.notifier)
+        .managerNameValidation(input);
   }
 
   ///
@@ -92,5 +107,72 @@ mixin class ManagerDetailInputEvent {
   ///
   void onCompanyPhoneNumberFieldClear(WidgetRef ref) {
     ref.read(companyPhoneNumberInputProvider.notifier).clearInput();
+  }
+
+  ///
+  /// '완료하기' 버튼을 눌렀을 때
+  ///
+  void onCompletedBtnTapped(WidgetRef ref) async {
+    try {
+      await EasyLoading.show();
+
+      final companyId = StringGenerator.generateRandomString();
+
+      final userData = UserEntity(
+        profileImgUrl: ref.read(userAuthProvider)?.photoURL,
+        uid: ref.read(userAuthProvider)!.uid,
+        email: ref.read(userAuthProvider)?.email,
+        name: ref.read(managerNameInputProvider)!,
+        companyId: companyId,
+        locale: 'ko',
+        signUpDate: DateTime.now(),
+        lastLoginDate: DateTime.now(),
+      );
+
+      final companyData = CompanyEntity(
+        id: companyId,
+        ceoName: ref.read(managerNameInputProvider)!,
+        ceoUserId: ref.read(userAuthProvider)!.uid,
+        companyName: ref.read(companyNameInputProvider)!,
+        email: ref.read(companyEmailInputProvider)!,
+        phoneNumber: ref.read(companyPhoneNumberInputProvider)!,
+        status: UserStatusTypes.ACTIVE,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
+
+      final memberData = MemberEntity(
+        uid: ref.read(userAuthProvider)!.uid,
+        name: ref.read(managerNameInputProvider)!,
+        position: '원장',
+        status: UserStatusTypes.ACTIVE,
+      );
+
+      await ref.read(userInfoProvider.notifier).createData(userData).then(
+        (_) async {
+          final result = await createCompanyUseCase.call(companyData);
+
+          result.fold(
+            onSuccess: (value) async {
+              final result = await createMemberUseCase.call((memberData, companyId));
+
+              result.fold(
+                onSuccess: (value) {
+                  const MainRoute().go(ref.context);
+                },
+                onFailure: (e) {
+                  // TODO: 탈퇴 기능 구현
+                },
+              );
+            },
+            onFailure: (e) {
+              // TODO: 탈퇴 기능 구현
+            },
+          );
+        },
+      );
+    } finally {
+      await EasyLoading.dismiss();
+    }
   }
 }

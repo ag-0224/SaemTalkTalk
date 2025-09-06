@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "1054262672008",
-    "firebase_url": "https://saemtalktalk-prod-1-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "saemtalktalk-prod-1",
-    "storage_bucket": "saemtalktalk-prod-1.firebasestorage.app"
+    "project_number": "506846795440",
+    "project_id": "saemtalktalk-prod-2",
+    "storage_bucket": "saemtalktalk-prod-2.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1054262672008:android:8cf89b7a6039af4e66bd3d",
+        "mobilesdk_app_id": "1:506846795440:android:1344346a074377b9dd4d75",
         "android_client_info": {
           "package_name": "com.example.saem_talk_talk"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCKxbS9VM9sMetgN3RQY9PpTLdP3N5xBv8"
+          "current_key": "AIzaSyAqu4FHwJbsI9egObNi8LTabLN8qFTLuzE"
         }
       ],
       "services": {

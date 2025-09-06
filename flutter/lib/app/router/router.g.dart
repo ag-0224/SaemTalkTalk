@@ -15,6 +15,7 @@ List<RouteBase> get $appRoutes => [
       $userTypeSelectRoute,
       $managerDetailInputRoute,
       $companySelectRoute,
+      $mainRoute,
     ];
 
 RouteBase get $splashRoute => GoRouteData.$route(
@@ -233,4 +234,27 @@ extension $TeacherDetailInputRouteExtension on TeacherDetailInputRoute {
 
   void replace(BuildContext context) =>
       context.replace(location, extra: $extra);
+}
+
+RouteBase get $mainRoute => GoRouteData.$route(
+      path: '/main',
+      name: 'main',
+      factory: $MainRouteExtension._fromState,
+    );
+
+extension $MainRouteExtension on MainRoute {
+  static MainRoute _fromState(GoRouterState state) => const MainRoute();
+
+  String get location => GoRouteData.$location(
+        '/main',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }

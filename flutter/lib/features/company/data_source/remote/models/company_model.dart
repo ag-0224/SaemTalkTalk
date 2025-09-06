@@ -57,12 +57,15 @@ class CompanyModel {
   }
 
   factory CompanyModel.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,) =>
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) =>
       CompanyModel.fromJson(snapshot.data()!);
 
-  static Map<String, Object?> toFirestore(CompanyModel model,
-      SetOptions? options,) {
+  static Map<String, Object?> toFirestore(
+    CompanyModel model,
+    SetOptions? options,
+  ) {
     final data = model.toJson();
 
     return data;
@@ -89,8 +92,7 @@ class CompanyModel {
     };
   }
 
-  Map<String, dynamic> updatedFieldToJson() =>
-      {
+  Map<String, dynamic> updatedFieldToJson() => {
         'company_name': companyName,
         'email': email,
         'phone_number': phoneNumber,

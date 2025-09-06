@@ -7,7 +7,7 @@ part of 'teacher_detail_input_route_arg_provider.dart';
 // **************************************************************************
 
 String _$teacherDetailInputRouteArgHash() =>
-    r'22a3703052dbac1d6a5c8d81fd8e7d2a63b97f70';
+    r'5ac3fa0d5ec7a5d2c7d7689ec6e85dbb6044a992';
 
 /// See also [teacherDetailInputRouteArg].
 @ProviderFor(teacherDetailInputRouteArg)

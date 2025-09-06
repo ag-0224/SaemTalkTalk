@@ -18,6 +18,11 @@ abstract interface class UserRemoteDataSource {
   Future<UserModel> getUser([String? uid]);
 
   ///
+  /// 유저 정보 삭제
+  ///
+  Future<void> deleteUser(UserModel user);
+
+  ///
   /// 마지막 접속 일자 갱신
   ///
   Future<void> updateLastLoginDate();

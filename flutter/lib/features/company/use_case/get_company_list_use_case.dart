@@ -28,18 +28,16 @@ final class GetCompanyListParams {
 ///
 /// 회사 컨텐츠 리스트 페이이네이션
 ///
-final class GetCompanyListUseCase extends BaseUseCase<
-    GetCompanyListParams,
+final class GetCompanyListUseCase extends BaseUseCase<GetCompanyListParams,
     Result<FirebasePaginatedResult<CompanyEntity, CompanyModel>>> {
   GetCompanyListUseCase(this._repository);
 
   final CompanyRepository _repository;
 
   @override
-  Future<Result<FirebasePaginatedResult<CompanyEntity, CompanyModel>>>
-  call(
-      GetCompanyListParams request,
-      ) =>
+  Future<Result<FirebasePaginatedResult<CompanyEntity, CompanyModel>>> call(
+    GetCompanyListParams request,
+  ) =>
       _repository.getPagedCompanyList(
         lastDocument: request.lastDocument,
         limit: request.limit,

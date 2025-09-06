@@ -11,6 +11,7 @@ import 'package:saem_talk_talk/features/company/data_source/remote/models/depart
 import 'package:saem_talk_talk/features/company/repository/company_repository.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/company_entity.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/department_entity.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
 import 'package:saem_talk_talk/features/company/repository/entities/position_entity.dart';
 
 class CompanyRepositoryImpl implements CompanyRepository {
@@ -84,6 +85,28 @@ class CompanyRepositoryImpl implements CompanyRepository {
       return Result.success(result);
     } catch (e) {
       return Result.failure(e is Exception ? e : Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> createCompany(CompanyEntity data) async {
+    try {
+      final createdCompany = await _companyRemoteDataSource.createCompany(data);
+
+      return Result.success(createdCompany);
+    } on Exception catch (e) {
+      return Result.failure(e);
+    }
+  }
+
+  @override
+  Future<Result<void>> createMember(MemberEntity data, String companyId) async {
+    try {
+      final createdMember = await _companyRemoteDataSource.createMember(data, companyId);
+
+      return Result.success(createdMember);
+    } on Exception catch (e) {
+      return Result.failure(e);
     }
   }
 }
