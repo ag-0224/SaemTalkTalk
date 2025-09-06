@@ -82,7 +82,9 @@ class CustomTextField extends HookWidget {
             children: <Widget>[
               if (activeObscureIcon)
                 _buildObsecureTextToggleIcon(obscureTextState),
-              if (activeObscureIcon && activeSuffixIcon && !isFieldEmpty(controller))
+              if (activeObscureIcon &&
+                  activeSuffixIcon &&
+                  !isFieldEmpty(controller))
                 Gap(8),
               if (activeSuffixIcon && !isFieldEmpty(controller))
                 _buildClearIcon(controller),

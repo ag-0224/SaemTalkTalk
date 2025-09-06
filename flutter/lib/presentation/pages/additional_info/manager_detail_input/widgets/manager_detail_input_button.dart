@@ -64,7 +64,9 @@ class _ManagerDetailInputButton extends HookConsumerWidget
 
     return ActivationButton(
         text: '완료하기',
-        onTap: isBtnActivate.value ? () {} : null,
+        onTap: isBtnActivate.value ? () {
+          onCompletedBtnTapped(ref);
+        } : null,
         isActive: isBtnActivate.value);
   }
 }

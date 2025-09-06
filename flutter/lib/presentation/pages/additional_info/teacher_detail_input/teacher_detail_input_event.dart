@@ -1,6 +1,9 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/router/router.dart';
+import 'package:saem_talk_talk/core/constants/user_status_enum.dart';
+import 'package:saem_talk_talk/features/company/company.dart';
+import 'package:saem_talk_talk/features/company/repository/entities/member_entity.dart';
 import 'package:saem_talk_talk/features/user/repositories/entities/user_entity.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/department_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/teacher_detail_input/providers/position_input_provider.dart';
@@ -80,9 +83,28 @@ mixin class TeacherDetailInputEvent {
         lastLoginDate: DateTime.now(),
       );
 
+      final memberData = MemberEntity(
+        uid: ref.read(userAuthProvider)!.uid,
+        name: ref.read(teacherNameInputProvider)!,
+        department: ref.read(departmentInputProvider),
+        position: ref.read(positionInputProvider),
+        status: UserStatusTypes.NOT_AUTH,
+      );
+
       await ref.read(userInfoProvider.notifier).createData(userData).then(
-            (_) async {
-          const MainRoute().go(ref.context);
+        (_) async {
+          final companyId = ref.read(teacherDetailInputRouteArgProvider).companyId;
+
+          final result = await createMemberUseCase.call((memberData, companyId));
+
+          result.fold(
+            onSuccess: (value) {
+              const MainRoute().go(ref.context);
+            },
+            onFailure: (e) {
+              // TODO: 탈퇴 기능 구현
+            },
+          );
         },
       );
     } finally {
