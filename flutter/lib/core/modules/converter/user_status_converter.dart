@@ -5,7 +5,7 @@ class UserStatusConverter implements JsonConverter<UserStatusTypes, String> {
   const UserStatusConverter();
 
   @override
-  UserStatusTypes fromJson(String status) => UserStatusTypes.getByKey(status.toLowerCase());
+  UserStatusTypes fromJson(String status) => UserStatusTypes.getByKey(status);
 
   @override
   String toJson(UserStatusTypes userStatus) => userStatus.key.toUpperCase();
