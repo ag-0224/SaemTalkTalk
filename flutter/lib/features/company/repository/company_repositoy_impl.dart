@@ -89,11 +89,41 @@ class CompanyRepositoryImpl implements CompanyRepository {
   }
 
   @override
+  Future<Result<CompanyEntity>> getCompany(String companyId) async {
+    try {
+      final remoteRes = await _companyRemoteDataSource.getCompany(companyId);
+
+      final result = CompanyEntity.fromModel(
+        remoteRes,
+      );
+
+      return Result.success(result);
+    } on Exception catch (e) {
+      return Result.failure(e);
+    }
+  }
+
+  @override
   Future<Result<void>> createCompany(CompanyEntity data) async {
     try {
       final createdCompany = await _companyRemoteDataSource.createCompany(data);
 
       return Result.success(createdCompany);
+    } on Exception catch (e) {
+      return Result.failure(e);
+    }
+  }
+
+  @override
+  Future<Result<MemberEntity>> getMember(String companyId, String uid) async {
+    try {
+      final remoteRes = await _companyRemoteDataSource.getMember(companyId, uid);
+
+      final result = MemberEntity.fromModel(
+        remoteRes,
+      );
+
+      return Result.success(result);
     } on Exception catch (e) {
       return Result.failure(e);
     }

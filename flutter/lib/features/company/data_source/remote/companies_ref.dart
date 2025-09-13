@@ -85,5 +85,5 @@ abstract class FirestoreMembersRef {
       );
 
   static Future<bool> isExist(String companyId, String userId) async =>
-      (await FirestoreMembersRef.collection(name).doc(userId).get()).exists;
+      (await FirestoreCompaniesRef.doc(companyId).collection(name).doc(userId).get()).exists;
 }

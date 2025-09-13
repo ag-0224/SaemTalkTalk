@@ -29,7 +29,11 @@ abstract interface class CompanyRepository {
 
   Future<Result<List<PositionEntity>>> getPositions(String companyId);
 
+  Future<Result<CompanyEntity>> getCompany(String companyId);
+
   Future<Result<void>> createCompany(CompanyEntity data);
+
+  Future<Result<MemberEntity>> getMember(String companyId, String uid);
 
   Future<Result<void>> createMember(MemberEntity data, String companyId);
 }

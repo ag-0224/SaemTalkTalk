@@ -102,6 +102,17 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
   }
 
   @override
+  Future<CompanyModel> getCompany(String companyId) async {
+    if (!await FirestoreCompaniesRef.isExist(companyId)) {
+      throw const NoCompanyDataException();
+    }
+
+    final snapshot = await FirestoreCompaniesRef.doc(companyId).get();
+
+    return snapshot.data()!;
+  }
+
+  @override
   Future<void> createCompany(CompanyEntity data) async {
     final companyId = data.id;
 
@@ -113,6 +124,17 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
     final company = CompanyModel.fromEntity(data);
 
     await companyData.set(company);
+  }
+
+  @override
+  Future<MemberModel> getMember(String companyId, String uid) async {
+    if (!await FirestoreMembersRef.isExist(companyId, uid)) {
+      throw const NoUserDataException();
+    }
+
+    final snapshot = await FirestoreMembersRef.doc(companyId, uid).get();
+
+    return snapshot.data()!;
   }
 
   @override
