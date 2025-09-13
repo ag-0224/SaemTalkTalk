@@ -15,6 +15,7 @@ List<RouteBase> get $appRoutes => [
       $userTypeSelectRoute,
       $managerDetailInputRoute,
       $companySelectRoute,
+      $userCompanyRequestRoute,
       $mainRoute,
     ];
 
@@ -234,6 +235,30 @@ extension $TeacherDetailInputRouteExtension on TeacherDetailInputRoute {
 
   void replace(BuildContext context) =>
       context.replace(location, extra: $extra);
+}
+
+RouteBase get $userCompanyRequestRoute => GoRouteData.$route(
+      path: '/user-company-request',
+      name: 'user company request',
+      factory: $UserCompanyRequestRouteExtension._fromState,
+    );
+
+extension $UserCompanyRequestRouteExtension on UserCompanyRequestRoute {
+  static UserCompanyRequestRoute _fromState(GoRouterState state) =>
+      const UserCompanyRequestRoute();
+
+  String get location => GoRouteData.$location(
+        '/user-company-request',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $mainRoute => GoRouteData.$route(

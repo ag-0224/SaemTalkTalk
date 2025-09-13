@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/router/router.dart';
 import 'package:saem_talk_talk/app/util/timer_notifier_provider.dart';
+import 'package:saem_talk_talk/core/constants/user_status_enum.dart';
 import 'package:saem_talk_talk/core/services/snack_bar_service.dart';
 import 'package:saem_talk_talk/features/auth/auth.dart';
+import 'package:saem_talk_talk/features/company/company.dart';
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_page.dart';
 import 'package:saem_talk_talk/presentation/providers/user/user_auth_provider.dart';
 import 'package:saem_talk_talk/presentation/providers/user/user_info_provider.dart';
@@ -39,16 +41,31 @@ mixin class SplashEvent {
     await ref.read(userInfoProvider.future).then(
       (userData) async {
         if (userData == null) {
-
           if (!auth.emailVerified) {
             const UserVerificationRoute().go(ref.context);
           } else {
             const UserTypeSelectRoute().go(ref.context);
           }
-
         } else {
-          final member =
-          const MainRoute().go(ref.context);
+          final companyId = userData.companyId;
+          final userId = userData.uid;
+
+          final result = await getMemberUseCase((companyId, userId));
+
+
+          result.fold(onSuccess: (value) {
+
+            // NOT_AUTH : 승인 되지 않았을 경우에 승인 대기 화면으로 이동한다.
+            if (value.status == UserStatusTypes.NOT_AUTH) {
+              const UserCompanyRequestRoute().go(ref.context);
+            }
+
+            // ACTIVE : 승인 되었을 경우에 main 화면으로 이동한다.
+            if (value.status == UserStatusTypes.ACTIVE) {
+              const MainRoute().go(ref.context);
+            }
+
+          }, onFailure: (e) {});
         }
       },
     );

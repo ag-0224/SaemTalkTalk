@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/router/router.dart';
 import 'package:saem_talk_talk/app/util/timer_notifier_provider.dart';

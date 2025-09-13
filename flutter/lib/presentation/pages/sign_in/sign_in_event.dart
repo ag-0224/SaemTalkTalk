@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:saem_talk_talk/app/router/router.dart';
+import 'package:saem_talk_talk/core/constants/user_status_enum.dart';
 import 'package:saem_talk_talk/core/services/snack_bar_service.dart';
 import 'package:saem_talk_talk/features/auth/auth.dart';
+import 'package:saem_talk_talk/features/company/company.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_in/providers/sign_in_email_input_provider.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_in/providers/sign_in_password_input_provider.dart';
 import 'package:saem_talk_talk/presentation/providers/user/user_auth_provider.dart';
@@ -24,17 +26,34 @@ mixin class SignInEvent {
     }
 
     await ref.read(userInfoProvider.future).then(
-          (userData) async {
+      (userData) async {
         if (userData == null) {
-
           if (!auth.emailVerified) {
             const UserVerificationRoute().go(ref.context);
           } else {
             const UserTypeSelectRoute().go(ref.context);
           }
-
         } else {
-          const MainRoute().go(ref.context);
+          final companyId = userData.companyId;
+          final userId = userData.uid;
+
+          final result = await getMemberUseCase((companyId, userId));
+
+          result.fold(
+              onSuccess: (value) {
+                // NOT_AUTH : 승인 되지 않았을 경우에 승인 대기 화면으로 이동한다.
+                if (value.status == UserStatusTypes.NOT_AUTH) {
+                  const UserCompanyRequestRoute().go(ref.context);
+                }
+
+                // ACTIVE : 승인 되었을 경우에 main 화면으로 이동한다.
+                if (value.status == UserStatusTypes.ACTIVE) {
+                  const MainRoute().go(ref.context);
+                }
+              },
+              onFailure: (e) {
+
+              });
         }
       },
     );
@@ -50,12 +69,11 @@ mixin class SignInEvent {
   }) async {
     try {
       await EasyLoading.show().then(
-            (_) {
-          return ref
-              .read(userAuthProvider.notifier).signIn(email, password);
+        (_) {
+          return ref.read(userAuthProvider.notifier).signIn(email, password);
         },
       ).then(
-            (_) => _routeByUserState(ref),
+        (_) => _routeByUserState(ref),
       );
     } finally {
       await EasyLoading.dismiss();

@@ -99,7 +99,7 @@ mixin class TeacherDetailInputEvent {
 
           result.fold(
             onSuccess: (value) {
-              const MainRoute().go(ref.context);
+              const UserCompanyRequestRoute().go(ref.context);
             },
             onFailure: (e) {
               // TODO: 탈퇴 기능 구현

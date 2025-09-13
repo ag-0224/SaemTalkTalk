@@ -9,6 +9,7 @@ import 'package:saem_talk_talk/presentation/pages/additional_info/user_type_sele
 import 'package:saem_talk_talk/presentation/pages/additional_info/user_verification/user_verification_page.dart';
 import 'package:saem_talk_talk/presentation/pages/main/main_page.dart';
 import 'package:saem_talk_talk/presentation/pages/permission/permission_page.dart';
+import 'package:saem_talk_talk/presentation/pages/request/user_request_page.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:saem_talk_talk/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:saem_talk_talk/presentation/pages/splash/splash_page.dart';
@@ -243,6 +244,24 @@ class TeacherDetailInputRoute extends GoRouteData {
   }
 }
 
+///
+/// User Company Request Route
+///
+@TypedGoRoute<UserCompanyRequestRoute>(
+  path: UserCompanyRequestRoute.path,
+  name: UserCompanyRequestRoute.name,
+)
+class UserCompanyRequestRoute extends GoRouteData {
+  const UserCompanyRequestRoute();
+
+  static const String path = '/user-company-request';
+  static const String name = 'user company request';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return UserRequestPage();
+  }
+}
 
 ///
 /// Main Route
